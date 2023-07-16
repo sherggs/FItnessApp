@@ -12,15 +12,17 @@ const SearchExercises = () => {
    
   const HandleSearch = async () => {
     if(Search){
-      const exerciseData = await fetchData('https://exercisedb.p.rapidapi.com/exercises/bodyPartList', exerciseOptions)
+      const exerciseData = await fetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseOptions)
 
-      console.log(exerciseData);
-    }  
-    
+      const searchedExercises = exerciseData.filter(
+        (exercise) => exercise.name.toLowerCase().includes(Search) 
+        || exercise.target.toLowerCase().includes(Search) 
+        || exercise.equipment.toLowerCase().includes(Search) 
+        || exercise.bodypart.toLowerCase().includes(Search) 
 
+    )  
+    }
   }
-
-
 
   return (
     <Stack alignItems='center' mt='37px' justifyContent='center' p='20px'>
@@ -75,5 +77,6 @@ const SearchExercises = () => {
     </Stack>
   )
 }
+
 
 export default SearchExercises
